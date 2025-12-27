@@ -2,15 +2,17 @@ import ExpoModulesCore
 
 #if canImport(FoundationModels)
 import FoundationModels
+
+/// Session storage wrapper - must be @available since LanguageModelSession is iOS 26+
+@available(iOS 26.0, macOS 26.0, *)
+private class SessionStore {
+  static let shared = SessionStore()
+  var sessions: [String: LanguageModelSession] = [:]
+}
 #endif
 
 /// Expo module providing access to Apple's on-device Foundation Models (Apple Intelligence)
 public class AppleIntelligenceModule: Module {
-  
-  #if canImport(FoundationModels)
-  // Store sessions for conversation context
-  private var sessions: [String: LanguageModelSession] = [:]
-  #endif
   
   public func definition() -> ModuleDefinition {
     Name("AppleIntelligence")
@@ -127,7 +129,7 @@ public class AppleIntelligenceModule: Module {
           _ = try await session.respond(to: "System: \(systemPrompt)")
         }
         
-        self.sessions[sessionId] = session
+        SessionStore.shared.sessions[sessionId] = session
         return sessionId
       }
       #endif
@@ -142,7 +144,7 @@ public class AppleIntelligenceModule: Module {
     AsyncFunction("sendSessionMessage") { (sessionId: String, message: String) -> [String: Any] in
       #if canImport(FoundationModels)
       if #available(iOS 26.0, macOS 26.0, *) {
-        guard let session = self.sessions[sessionId] else {
+        guard let session = SessionStore.shared.sessions[sessionId] else {
           return [
             "success": false,
             "error": "Session not found. Create a new session first."
@@ -174,12 +176,20 @@ public class AppleIntelligenceModule: Module {
       #if canImport(FoundationModels)
       if #available(iOS 26.0, macOS 26.0, *) {
         // Remove the old session and create a new one with the same ID
-        if self.sessions[sessionId] != nil {
-          self.sessions[sessionId] = LanguageModelSession()
+        if SessionStore.shared.sessions[sessionId] != nil {
+          SessionStore.shared.sessions[sessionId] = LanguageModelSession()
         }
+      }
+      #endif
+    }
+    
+    /// End and remove a session
+    AsyncFunction("endSession") { (sessionId: String) in
+      #if canImport(FoundationModels)
+      if #available(iOS 26.0, macOS 26.0, *) {
+        SessionStore.shared.sessions.removeValue(forKey: sessionId)
       }
       #endif
     }
   }
 }
-

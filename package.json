@@ -1,6 +1,6 @@
 {
   "name": "@eitjuh/expo-apple-intelligence",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Access Apple's on-device Foundation Models (Apple Intelligence) from React Native/Expo. Private, fast, offline AI.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
