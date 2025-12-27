@@ -1,0 +1,10 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["AppleIntelligenceModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.appleintelligence.AppleIntelligenceModule"]
+  }
+}
+

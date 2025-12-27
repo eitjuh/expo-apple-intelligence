@@ -1,0 +1,43 @@
+# Source files (we publish build/)
+src/
+
+# Development files
+.github/
+example/
+docs/
+
+# Config files
+.gitignore
+.eslintrc*
+.prettierrc*
+tsconfig.json
+jest.config.*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# iOS development
+ios/Pods/
+ios/build/
+*.xcuserstate
+*.xcworkspace/
+
+# Android development
+android/.gradle/
+android/build/
+
+# Testing
+coverage/
+.jest/
+__tests__/
+*.test.*
+*.spec.*
+
+# Misc
+*.tgz
+*.log
+.DS_Store
+
