@@ -37,7 +37,7 @@
 ## 🚀 Installation
 
 ```bash
-npx expo install expo-apple-intelligence
+npx expo install @eitjuh/expo-apple-intelligence
 ```
 
 ### Development Build Required
@@ -55,7 +55,7 @@ npx expo run:ios
 ## 📖 Quick Start
 
 ```typescript
-import * as AppleIntelligence from 'expo-apple-intelligence';
+import * as AppleIntelligence from '@eitjuh/expo-apple-intelligence';
 
 // Check if Apple Intelligence is available
 const available = await AppleIntelligence.isAvailable();
@@ -141,7 +141,7 @@ await session.reset();
 
 ```typescript
 import { useState } from 'react';
-import * as AppleIntelligence from 'expo-apple-intelligence';
+import * as AppleIntelligence from '@eitjuh/expo-apple-intelligence';
 
 function ChatScreen() {
   const [response, setResponse] = useState('');
@@ -169,7 +169,7 @@ function ChatScreen() {
 
 ```typescript
 import { useEffect, useState } from 'react';
-import * as AppleIntelligence from 'expo-apple-intelligence';
+import * as AppleIntelligence from '@eitjuh/expo-apple-intelligence';
 
 function App() {
   const [status, setStatus] = useState<string>('Checking...');
@@ -189,7 +189,7 @@ function App() {
 ### Persistent Conversation
 
 ```typescript
-import * as AppleIntelligence from 'expo-apple-intelligence';
+import * as AppleIntelligence from '@eitjuh/expo-apple-intelligence';
 
 // Create a session once
 const session = await AppleIntelligence.createSession({
